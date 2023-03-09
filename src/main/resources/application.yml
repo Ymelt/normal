@@ -4,6 +4,11 @@ server:
 #    context-path:
 #    数据库
 spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
   datasource:
     MyDb1:
       type: com.alibaba.druid.pool.DruidDataSource
