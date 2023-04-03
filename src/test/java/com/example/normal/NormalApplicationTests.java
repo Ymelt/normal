@@ -5,6 +5,7 @@ package com.example.normal;
 import com.example.normal.entity.Doctors;
 import com.example.normal.mapper.DoctorsMapper;
 import com.example.normal.service.HelloSend;
+import com.example.normal.service.impl.DoctorsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,8 @@ class NormalApplicationTests {
     private DoctorsMapper doctorsMapper;
     @Resource
     private HelloSend helloSend;
+    @Resource
+    private DoctorsServiceImpl doctorsServiceImpl;
 
     @Test
     public void contextLoads() {
@@ -37,9 +40,9 @@ class NormalApplicationTests {
         doctorsMapper.insert(doctors);
     }
 
-    @org.junit.Test
+    @Test
     public void test2(){
-
+        doctorsServiceImpl.testing();
     }
 
 }
