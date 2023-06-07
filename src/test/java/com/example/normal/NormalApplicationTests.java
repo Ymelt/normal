@@ -13,6 +13,10 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,6 +47,20 @@ class NormalApplicationTests {
     @Test
     public void test2(){
         doctorsServiceImpl.testing();
+    }
+
+    @Test
+    public void test3(){
+
+        Set<Integer> phoneList = new HashSet<>();
+        phoneList.add(12);
+        phoneList.add(13);
+        phoneList.add(14);
+        phoneList.add(15);
+
+        for (Integer integer : phoneList) {
+            System.out.println(integer);
+        }
     }
 
 }

@@ -9,10 +9,14 @@ import com.example.normal.service.DoctorsService;
 import com.example.normal.util.Base64;
 import com.example.normal.util.JsonUtils;
 import com.google.code.kaptcha.Producer;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.FastByteArrayOutputStream;
 
 import javax.annotation.Resource;
@@ -24,7 +28,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-@Component
+@Slf4j
 @Service
 public class DoctorsServiceImpl extends ServiceImpl<DoctorsMapper, Doctors> implements DoctorsService{
 
@@ -33,6 +37,8 @@ public class DoctorsServiceImpl extends ServiceImpl<DoctorsMapper, Doctors> impl
 
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -116,6 +122,48 @@ public class DoctorsServiceImpl extends ServiceImpl<DoctorsMapper, Doctors> impl
 
         System.out.println(Base64.encode(os.toByteArray()));
     }
+
+    private static final String THE_CHANGE_KEY = "changeInfo";
+
+
+    @Transactional
+    public void forTheRedisTest(Boolean b){
+//        stringRedisTemplate.opsForValue().set(THE_CHANGE_KEY, "notYet");
+        String s = stringRedisTemplate.opsForValue().get(THE_CHANGE_KEY);
+        if ("notYet".equals(s)){
+            stringRedisTemplate.opsForValue().set(THE_CHANGE_KEY, "goYet");
+            try {
+                giveOneMethod(b);
+            } catch (Exception e) {
+                stringRedisTemplate.opsForValue().set(THE_CHANGE_KEY, "notYet");
+                log.info("执行异常了");
+//                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                throw new RuntimeException();
+
+            }
+            stringRedisTemplate.opsForValue().set(THE_CHANGE_KEY, "notYet");
+        }else if ("goYet".equals(s)){
+            log.info("something is over");
+        }
+
+    }
+
+    @Override
+    public void forTheRedisTestSecond() {
+        redisTemplate.opsForValue().set("adsf","asdf");
+    }
+
+    public void giveOneMethod(Boolean b) throws Exception {
+        log.info("method is running");
+        Doctors doctors = baseMapper.selectById(1);
+        doctors.setName("jackNew");
+        baseMapper.updateById(doctors);
+        Thread.sleep(5000);
+        if (!b){
+            throw new RuntimeException();
+        }
+    }
+
 
 
 

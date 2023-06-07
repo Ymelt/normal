@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 @Service
-@RabbitListener(queues = "q_hello")
+//@RabbitListener(queues = "q_hello")
 public class HelloReceiver {
 
     @RabbitHandler
