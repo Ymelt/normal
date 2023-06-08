@@ -34,6 +34,9 @@ import java.util.Map;
 @Aspect
 @Component
 public class GlobalLogAspect extends BaseAspectsSupport {
+
+    private Parameter[] parameters;
+
     /**
      * 定义切面Pointcut
      */
