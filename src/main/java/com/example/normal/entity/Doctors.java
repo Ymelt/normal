@@ -13,6 +13,8 @@ import java.io.Serializable;
 public class Doctors implements Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
+
+
     @TableField(value = "name")
     private String name;
 
