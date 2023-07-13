@@ -1,10 +1,14 @@
 package com.example.normal;
 
+import com.example.normal.annotaion.FieldImport;
+import com.example.normal.entity.Doctors;
 import com.example.normal.entity.TheApple;
 import com.example.normal.entity.Tree;
 import com.example.normal.pojo.MyThread;
 import org.junit.Test;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.*;
 
 
@@ -686,6 +690,19 @@ public class NormalTest {
         thread.start();
         System.out.println("is going end");
 
+    }
+
+    public static void main(String[] args) {
+        Class<Doctors> aClass = Doctors.class;
+        Field[] fields = aClass.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(FieldImport.class)){
+                FieldImport ab = field.getAnnotation(FieldImport.class);
+                System.out.println(ab.clownName());
+                System.out.println(ab.clownNameInCh());
+                System.out.println(ab.orderValue());
+            }
+        }
     }
 
 

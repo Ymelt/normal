@@ -1,6 +1,7 @@
 package com.example.normal.controller;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.example.normal.annotaion.PrePermission;
 import com.example.normal.common.Result;
 import com.example.normal.service.DoctorsService;
 import lombok.extern.slf4j.Slf4j;
@@ -45,5 +46,14 @@ public class DoctorsController {
         return "do not go gentle";
 
     }
+
+    @PrePermission("123")
+    @RequestMapping("/youSeeThis")
+    public String youSeeThis(){
+        String s = doctorsService.articleDetail();
+        doctorsService.sendMessage();
+        return s;
+    }
+
 
 }

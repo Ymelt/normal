@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+@EnableAsync
 @Slf4j
 @Service
 public class DoctorsServiceImpl extends ServiceImpl<DoctorsMapper, Doctors> implements DoctorsService{
@@ -164,8 +166,29 @@ public class DoctorsServiceImpl extends ServiceImpl<DoctorsMapper, Doctors> impl
         }
     }
 
+    @Async
+    @Override
+    public void sendMessage(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("message send success");
+    }
 
+    @Override
+    public String articleDetail(){
+        System.out.println("this Thread" + Thread.currentThread().getName());
 
+        return "这里是文章详情";
+    }
+
+    @Override
+    public void beforeMethodGoOn() {
+        System.out.println("look this annotation");
+        System.out.println("it's going work");
+    }
 
 
 }

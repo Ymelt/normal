@@ -23,4 +23,10 @@ public interface DoctorsService extends IService<Doctors>{
 
     void forTheRedisTestSecond();
 
+    void sendMessage();
+
+    String articleDetail();
+
+    void beforeMethodGoOn();
+
 }
