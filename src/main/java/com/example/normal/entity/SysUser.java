@@ -24,7 +24,7 @@ public class SysUser implements Serializable {
      * 部门ID
      */
     @TableField(value = "dept_id")
-    private Long deptId;
+    private Integer deptId;
 
     /**
      * 用户账号

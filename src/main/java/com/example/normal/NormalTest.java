@@ -696,13 +696,14 @@ public class NormalTest {
         Class<Doctors> aClass = Doctors.class;
         Field[] fields = aClass.getDeclaredFields();
         for (Field field : fields) {
-            if (field.isAnnotationPresent(FieldImport.class)){
+            if (field.isAnnotationPresent(FieldImport.class)) {
                 FieldImport ab = field.getAnnotation(FieldImport.class);
                 System.out.println(ab.clownName());
                 System.out.println(ab.clownNameInCh());
                 System.out.println(ab.orderValue());
             }
         }
+
     }
 
 
