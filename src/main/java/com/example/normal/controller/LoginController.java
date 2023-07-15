@@ -18,7 +18,7 @@ public class LoginController {
     private LoginService loginService;
 
 
-    @RequestMapping("/login")
+    @RequestMapping("/test/123")
     public Result login(@RequestBody LoginInput input){
 
         String token = loginService.loginByUsernamePassword(input.getUserName(), input.getPassword());

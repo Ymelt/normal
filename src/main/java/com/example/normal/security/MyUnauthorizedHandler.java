@@ -1,4 +1,4 @@
-package com.example.normal.filter;
+package com.example.normal.security;
 
 import com.alibaba.fastjson2.JSONObject;
 import org.springframework.security.core.AuthenticationException;

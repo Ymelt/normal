@@ -1,4 +1,4 @@
-package com.example.normal.filter;
+package com.example.normal.security;
 
 import cn.hutool.jwt.JWTUtil;
 import com.example.normal.constant.MyConstant;
@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -37,6 +36,9 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
+
+
+
 
         boolean verify = JWTUtil.verify(authorization, MyConstant.JWT_AUTHENTICATION_TYPE.getBytes(StandardCharsets.UTF_8));
         if (!verify){

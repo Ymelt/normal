@@ -9,6 +9,8 @@ import com.example.normal.service.impl.DoctorsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -28,6 +30,9 @@ class NormalApplicationTests {
     private HelloSend helloSend;
     @Resource
     private DoctorsServiceImpl doctorsServiceImpl;
+    @Resource
+    private PasswordEncoder passwordEncoder;
+
 
     @Test
     public void contextLoads() {
@@ -61,6 +66,13 @@ class NormalApplicationTests {
         for (Integer integer : phoneList) {
             System.out.println(integer);
         }
+    }
+
+    @Test
+    public void test12(){
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String ttt = passwordEncoder.encode("ttt");
+        System.out.println(ttt);
     }
 
 }

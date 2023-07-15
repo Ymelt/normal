@@ -29,5 +29,10 @@ public class OrganizationController {
     public Result getTree(){
         return JsonUtils.success(organizationService.buildTree());
     }
+
+    @RequestMapping("/test/12")
+    public Result test12(){
+        return JsonUtils.success("this is sunday ' class");
+    }
 }
 

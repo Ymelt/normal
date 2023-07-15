@@ -1,4 +1,4 @@
-package com.example.normal.filter;
+package com.example.normal.security;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
