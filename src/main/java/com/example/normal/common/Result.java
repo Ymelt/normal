@@ -1,7 +1,6 @@
 package com.example.normal.common;
 
 
-import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;
 
 @Data
